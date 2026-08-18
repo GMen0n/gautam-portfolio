@@ -5,7 +5,7 @@ export const tbp = {
   description:
     "An independent media creation house covering consumer electronics and the Indian automobile scene.",
   roles: ["Host", "Operations", "Logistics", "Content", "Design Direction"],
-  youtubeId: "",
-  youtubeUrl: "",
+  youtubeId: "Fvcnb_YY70w",
+  youtubeUrl: "https://www.youtube.com/watch?v=Fvcnb_YY70w",
   instagramUrl: "",
 };
