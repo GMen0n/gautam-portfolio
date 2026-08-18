@@ -26,3 +26,4 @@ pnpm-debug.log*
 # agent skills (not part of the public site)
 .agents/
 skills-lock.json
+.vercel
