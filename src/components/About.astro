@@ -1,0 +1,45 @@
+---
+import { FileDown } from "lucide-react";
+import SectionHeader from "./SectionHeader.astro";
+import { aboutText, availability, profile } from "../data/links";
+import { education } from "../data/education";
+---
+
+<section id="about" class="scroll-mt-24">
+  <div class="section-shell">
+    <SectionHeader index="01" title="About" />
+    <p class="max-w-[720px] text-lg leading-[1.7] text-text-secondary">
+      {aboutText}
+    </p>
+    <p class="mt-8 max-w-[720px] rounded-lg border border-bg-surface bg-bg-elevated px-4 py-3 text-sm text-text-primary">
+      {availability}
+    </p>
+    <a
+      href={profile.resume}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="link-slide mt-6 inline-flex items-center gap-2 text-sm text-accent-teal"
+    >
+      <FileDown size={16} stroke-width={1.5} />
+      Download Resume (PDF)
+    </a>
+    <div class="mt-14 max-w-[720px] space-y-8">
+      <h3 class="font-display text-xs font-medium uppercase tracking-[0.08em] text-text-muted">
+        Education
+      </h3>
+      {
+        education.map((item) => (
+          <div>
+            <p class="font-display text-lg font-semibold text-text-primary">{item.school}</p>
+            <p class="mt-1 text-sm text-text-secondary">
+              {item.credential}
+              <span class="mx-2 font-mono text-text-muted">·</span>
+              <span class="font-mono text-text-muted">{item.dates}</span>
+            </p>
+            {item.detail && <p class="mt-2 text-sm text-text-secondary">{item.detail}</p>}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

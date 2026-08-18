@@ -1,0 +1,56 @@
+---
+import { ArrowLeft } from "lucide-react";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer.astro";
+import { designPieces } from "../data/design";
+---
+
+<BaseLayout
+  title="Design Work — Gautam Menon"
+  description="Posters, branding, and design leadership from Maaya, UniCon, GDSC, and The ECC Odyssey."
+>
+  <Navbar client:load />
+  <main class="pt-24">
+    <div class="section-shell">
+      <a href="/#skills" class="link-slide inline-flex items-center gap-2 text-sm text-text-secondary">
+        <ArrowLeft size={16} stroke-width={1.5} />
+        Back to Portfolio
+      </a>
+      <h1 class="mt-10 font-display text-4xl font-bold tracking-tight text-text-primary md:text-5xl">
+        Design Work
+      </h1>
+      <p class="mt-4 max-w-[640px] text-base leading-relaxed text-text-secondary">
+        Campaigns and identity work from campus festivals, MUN, and student communities. Drop
+        images into <span class="font-mono text-sm">public/design/</span> and set paths in
+        <span class="font-mono text-sm">src/data/design.ts</span>.
+      </p>
+      <div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          designPieces.map((piece) => (
+            <article class="group relative overflow-hidden rounded-2xl border border-bg-surface bg-bg-elevated">
+              {piece.image ? (
+                <img
+                  src={piece.image}
+                  alt=""
+                  loading="lazy"
+                  class="aspect-[4/5] w-full object-cover"
+                />
+              ) : (
+                <div
+                  class="aspect-[4/5] w-full"
+                  style="background: var(--gradient-subtle)"
+                />
+              )}
+              <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-bg-base/90 via-bg-base/20 to-transparent p-5 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100">
+                <h2 class="font-display text-xl font-semibold text-text-primary">{piece.title}</h2>
+                <p class="mt-1 text-sm text-text-secondary">{piece.context}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

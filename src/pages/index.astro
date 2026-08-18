@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import About from "../components/About.astro";
+import Projects from "../components/Projects";
+import Experience from "../components/Experience";
+import Skills from "../components/Skills";
+import Research from "../components/Research.astro";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Gautam Menon — AI that ships">
+  <Navbar client:load />
+  <main>
+    <Hero client:load />
+    <About />
+    <Projects client:visible />
+    <Experience client:visible />
+    <Skills client:visible />
+    <Research />
+    <Contact client:visible />
+  </main>
+  <Footer />
+</BaseLayout>
