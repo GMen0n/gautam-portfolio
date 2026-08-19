@@ -1,24 +1,67 @@
 export type DesignPiece = {
   title: string;
   context: string;
-  image?: string;
+  image: string;
 };
 
-export const designPieces: DesignPiece[] = [
+export type DesignStack = {
+  id: string;
+  label: string;
+  description: string;
+  pieces: DesignPiece[];
+};
+
+const maaya25Pieces: DesignPiece[] = [
   {
-    title: "Maaya 2025",
-    context: "Festival identity and event posters as Design Head",
+    title: "Creatiwitty",
+    context: "Maaya 2025",
+    image: "/design/maaya25/creatiwitty.png",
   },
   {
-    title: "UniCon MunSOC",
-    context: "Branding and design direction, PESU-ECC 2026",
+    title: "Cultural Events",
+    context: "Maaya 2025 poster",
+    image: "/design/maaya25/cultural-events.png",
   },
   {
-    title: "GDSC PESU-ECC",
-    context: "Banners and member work, 2023–2024",
+    title: "Esports",
+    context: "Maaya 2025 poster",
+    image: "/design/maaya25/esports.png",
   },
   {
-    title: "The ECC Odyssey",
-    context: "Core member",
+    title: "Miscellaneous Events",
+    context: "Maaya 2025 poster",
+    image: "/design/maaya25/miscellaneous-events.png",
+  },
+  {
+    title: "Maaya Poster",
+    context: "Maaya 2025",
+    image: "/design/maaya25/poster.png",
+  },
+  {
+    title: "Real Esports",
+    context: "Maaya 2025 poster",
+    image: "/design/maaya25/real-esports.png",
+  },
+  {
+    title: "Thamarassery",
+    context: "Maaya 2025",
+    image: "/design/maaya25/thamarassery.png",
+  },
+  {
+    title: "Maaya Detail",
+    context: "Maaya 2025",
+    image: "/design/maaya25/detail.png",
   },
 ];
+
+export const designStacks: DesignStack[] = [
+  {
+    id: "maaya25",
+    label: "maaya25",
+    description: "Festival identity and event posters — Design Head, Maaya 2025 @ PESU",
+    pieces: maaya25Pieces,
+  },
+];
+
+/** Flat list for lightbox / legacy use */
+export const designPieces = designStacks.flatMap((s) => s.pieces);
