@@ -3,7 +3,8 @@ import { ArrowLeft } from "lucide-react";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer.astro";
-import { designPieces } from "../data/design";
+import DesignGallery from "../components/DesignGallery";
+import { designStacks } from "../data/design";
 ---
 
 <BaseLayout
@@ -21,35 +22,9 @@ import { designPieces } from "../data/design";
         Design Work
       </h1>
       <p class="mt-4 max-w-[640px] text-base leading-relaxed text-text-secondary">
-        Campaigns and identity work from campus festivals, MUN, and student communities. Drop
-        images into <span class="font-mono text-sm">public/design/</span> and set paths in
-        <span class="font-mono text-sm">src/data/design.ts</span>.
+        Stacks of campaign work. Hover pauses the shuffle — click to open the full gallery.
       </p>
-      <div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          designPieces.map((piece) => (
-            <article class="glow-card group relative overflow-hidden rounded-2xl">
-              {piece.image ? (
-                <img
-                  src={piece.image}
-                  alt=""
-                  loading="lazy"
-                  class="aspect-[4/5] w-full object-cover"
-                />
-              ) : (
-                <div
-                  class="aspect-[4/5] w-full"
-                  style="background: var(--gradient-subtle)"
-                />
-              )}
-              <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-bg-base/90 via-bg-base/20 to-transparent p-5 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100">
-                <h2 class="font-display text-xl font-semibold text-text-primary">{piece.title}</h2>
-                <p class="mt-1 text-sm text-text-secondary">{piece.context}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
+      <DesignGallery client:load stacks={designStacks} />
     </div>
   </main>
   <Footer />
