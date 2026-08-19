@@ -44,16 +44,12 @@ export default function Contact() {
   return (
     <section id="contact" className="scroll-mt-24">
       <div className="section-shell">
-        <div className="mb-10 flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-wide text-text-muted">[06]</span>
-          <span className="font-mono text-sm text-text-muted">/</span>
-          <h2 className="font-display text-sm font-medium uppercase tracking-[0.14em] text-text-primary">
-            Contact
-          </h2>
-          <span className="h-px flex-1 bg-bg-surface" />
+        <div className="section-heading">
+          <h2>Contact</h2>
+          <span className="rule" />
         </div>
         <h3 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
-          Let&apos;s <span className="text-accent-amber">connect.</span>
+          Let&apos;s <span className="text-accent">connect.</span>
         </h3>
         <p className="mt-5 max-w-[560px] text-base leading-relaxed text-text-secondary">
           I&apos;m currently open to Summer 2027 internship opportunities in SDE and AI Engineering
@@ -68,7 +64,7 @@ export default function Contact() {
                 href={card.href}
                 target={card.external ? "_blank" : undefined}
                 rel={card.external ? "noopener noreferrer" : undefined}
-                className="glow-card group rounded-2xl border border-bg-surface p-6 transition-transform duration-300 hover:scale-[1.02]"
+                className="glow-card group rounded-2xl p-6"
                 initial={reduce ? false : { opacity: 0, y: 16, scale: 0.97 }}
                 whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}

@@ -7,18 +7,14 @@ export default function Experience() {
   return (
     <section id="experience" className="scroll-mt-24">
       <div className="section-shell">
-        <div className="mb-10 flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-wide text-text-muted">[03]</span>
-          <span className="font-mono text-sm text-text-muted">/</span>
-          <h2 className="font-display text-sm font-medium uppercase tracking-[0.14em] text-text-primary">
-            Experience
-          </h2>
-          <span className="h-px flex-1 bg-bg-surface" />
+        <div className="section-heading">
+          <h2>Experience</h2>
+          <span className="rule" />
         </div>
         <ol className="relative ml-3 border-l border-transparent md:ml-4">
           <span
             className="absolute top-1 bottom-1 left-[-1px] w-px"
-            style={{ background: "linear-gradient(180deg, #4F8EF7, #8B5CF6, #EC4899)" }}
+            style={{ background: "linear-gradient(180deg, #FF6D29, #E8A84A)" }}
             aria-hidden
           />
           {experience.map((job, i) => (
@@ -30,9 +26,9 @@ export default function Experience() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
             >
-              <span className="absolute top-1.5 left-[-5px] h-2.5 w-2.5 rounded-full bg-accent-blue ring-4 ring-bg-base" />
+              <span className="absolute top-1.5 left-[-5px] h-2.5 w-2.5 rounded-full bg-accent ring-4 ring-bg-base" />
               <h3 className="font-display text-xl font-semibold text-text-primary">{job.role}</h3>
-              <p className="mt-1 text-base font-medium text-accent-teal">{job.company}</p>
+              <p className="mt-1 text-base font-medium text-accent-amber">{job.company}</p>
               <p className="mt-1 font-mono text-[13px] text-text-muted">{job.dates}</p>
               <ul className="mt-4 max-w-[720px] space-y-2 text-[15px] leading-relaxed text-text-secondary">
                 {job.bullets.map((bullet) => (
