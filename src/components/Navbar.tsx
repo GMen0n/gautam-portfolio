@@ -17,7 +17,7 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors ${
         scrolled || open
-          ? "border-bg-surface bg-bg-base/75 backdrop-blur-xl"
+          ? "glass border-white/10"
           : "border-transparent bg-transparent"
       }`}
     >
@@ -33,7 +33,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
+                className="text-sm font-medium text-text-secondary transition-colors hover:text-accent"
               >
                 {item.label}
               </a>
@@ -51,12 +51,12 @@ export default function Navbar() {
         </button>
       </nav>
       {open && (
-        <ul className="space-y-1 border-t border-bg-surface px-6 py-4 md:hidden">
+        <ul className="space-y-1 border-t border-white/10 px-6 py-4 md:hidden">
           {navItems.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
-                className="block py-2 text-base text-text-secondary"
+                className="block py-2 text-base text-text-secondary hover:text-accent"
                 onClick={() => setOpen(false)}
               >
                 {item.label}

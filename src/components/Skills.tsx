@@ -8,19 +8,15 @@ export default function Skills() {
   return (
     <section id="skills" className="scroll-mt-24">
       <div className="section-shell">
-        <div className="mb-10 flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-wide text-text-muted">[04]</span>
-          <span className="font-mono text-sm text-text-muted">/</span>
-          <h2 className="font-display text-sm font-medium uppercase tracking-[0.14em] text-text-primary">
-            Skills
-          </h2>
-          <span className="h-px flex-1 bg-bg-surface" />
+        <div className="section-heading">
+          <h2>Skills</h2>
+          <span className="rule" />
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {skillGroups.map((group, i) => (
             <motion.article
               key={group.title}
-              className="glow-card rounded-2xl border border-bg-surface p-6"
+              className="glow-card rounded-2xl p-6"
               initial={reduce ? false : { opacity: 0, y: 16, scale: 0.97 }}
               whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.25 }}
@@ -39,7 +35,7 @@ export default function Skills() {
         </div>
 
         <motion.div
-          className="mt-10 rounded-2xl border border-bg-surface bg-bg-elevated p-6"
+          className="glow-card mt-10 rounded-2xl p-6"
           initial={reduce ? false : { opacity: 0, y: 16 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -77,7 +73,7 @@ export default function Skills() {
           </ul>
           <a
             href="/design"
-            className="link-slide mt-5 inline-flex items-center gap-2 text-sm text-accent-teal"
+            className="link-slide mt-5 inline-flex items-center gap-2 text-sm text-accent"
           >
             View Design Work
             <ArrowRight size={14} strokeWidth={1.5} />

@@ -11,7 +11,7 @@ import { tbp } from "../data/tbp";
   <main class="pt-24">
     <div class="section-shell">
       <a href="/" class="link-slide inline-flex items-center gap-2 text-sm text-text-secondary">
-        <ArrowLeft size={16} stroke-width={1.5} />
+        <ArrowLeft size={16} strokeWidth={1.5} />
         Back to Portfolio
       </a>
       <p class="mt-12 font-mono text-sm text-text-muted">{tbp.role}</p>
@@ -27,7 +27,7 @@ import { tbp } from "../data/tbp";
       </p>
 
       <div
-        class="mt-12 aspect-video w-full overflow-hidden rounded-2xl border border-bg-surface bg-bg-elevated"
+        class="glow-card mt-12 aspect-video w-full overflow-hidden rounded-2xl"
       >
         {
           tbp.youtubeId ? (
@@ -60,10 +60,10 @@ import { tbp } from "../data/tbp";
               href={tbp.youtubeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 text-sm text-accent-teal"
+              class="inline-flex items-center gap-1 text-sm text-accent"
             >
               YouTube
-              <ArrowUpRight size={14} stroke-width={1.5} />
+              <ArrowUpRight size={14} strokeWidth={1.5} />
             </a>
           )
         }
@@ -73,10 +73,10 @@ import { tbp } from "../data/tbp";
               href={tbp.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 text-sm text-accent-teal"
+              class="inline-flex items-center gap-1 text-sm text-accent"
             >
               Instagram
-              <ArrowUpRight size={14} stroke-width={1.5} />
+              <ArrowUpRight size={14} strokeWidth={1.5} />
             </a>
           )
         }

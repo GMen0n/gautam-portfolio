@@ -7,7 +7,7 @@ import { tbp } from "../data/tbp";
 
 <section id="research" class="scroll-mt-24">
   <div class="section-shell">
-    <SectionHeader index="05" title="Research & Leadership" />
+    <SectionHeader title="Research & Leadership" />
 
     <article class="max-w-[800px]">
       <h3 class="font-display text-xs font-medium uppercase tracking-[0.08em] text-text-muted">
@@ -29,7 +29,7 @@ import { tbp } from "../data/tbp";
       </ul>
     </article>
 
-    <article class="glow-card mt-12 max-w-[800px] rounded-2xl border border-bg-surface p-6 md:p-8">
+    <article class="glow-card mt-12 max-w-[800px] rounded-2xl p-6 md:p-8">
       <p class="font-mono text-xs text-text-muted">{tbp.role}</p>
       <h3 class="mt-2 font-display text-2xl font-semibold text-text-primary">{tbp.name}</h3>
       <p class="mt-3 max-w-[640px] text-[15px] leading-relaxed text-text-secondary">
@@ -38,10 +38,10 @@ import { tbp } from "../data/tbp";
       <p class="mt-4 text-sm text-text-muted">Roles: {tbp.roles.join(" · ")}</p>
       <a
         href="/tbp"
-        class="link-slide mt-6 inline-flex items-center gap-2 text-sm text-accent-teal"
+        class="link-slide mt-6 inline-flex items-center gap-2 text-sm text-accent"
       >
         Explore The Buyers Perspective
-        <ArrowRight size={14} stroke-width={1.5} />
+        <ArrowRight size={14} strokeWidth={1.5} />
       </a>
     </article>
 

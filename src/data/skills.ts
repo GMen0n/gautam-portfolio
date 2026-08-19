@@ -1,22 +1,22 @@
 export const skillGroups = [
   {
     title: "Languages & Frameworks",
-    accent: "text-accent-blue",
+    accent: "text-accent",
     items: ["Python", "Java", "JavaScript", "ReactJS", "FastAPI", "SQL"],
   },
   {
     title: "AI & LLMOps",
-    accent: "text-accent-violet",
+    accent: "text-accent-amber",
     items: ["RAG Pipelines", "Prompt/Context Engineering", "Vector DBs", "Guardrails"],
   },
   {
     title: "Cloud & DevOps",
-    accent: "text-accent-teal",
+    accent: "text-accent-gold",
     items: ["Git / GitHub", "Docker", "Kubernetes", "CI/CD Pipelines"],
   },
   {
     title: "Machine Learning",
-    accent: "text-accent-pink",
+    accent: "text-accent",
     items: ["Random Forest", "SVM", "CNNs", "Llama-3.3", "Computer Vision"],
   },
 ] as const;

@@ -3,10 +3,10 @@ import { ArrowUpRight } from "lucide-react";
 import { projects } from "../data/projects";
 
 const badgeAccents = [
-  "border-l-accent-blue",
-  "border-l-accent-violet",
-  "border-l-accent-teal",
-  "border-l-accent-pink",
+  "border-l-accent",
+  "border-l-accent-amber",
+  "border-l-accent-gold",
+  "border-l-brown",
 ];
 
 export default function Projects() {
@@ -15,19 +15,15 @@ export default function Projects() {
   return (
     <section id="work" className="scroll-mt-24">
       <div className="section-shell">
-        <div className="mb-10 flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-wide text-text-muted">[02]</span>
-          <span className="font-mono text-sm text-text-muted">/</span>
-          <h2 className="font-display text-sm font-medium uppercase tracking-[0.14em] text-text-primary">
-            Work
-          </h2>
-          <span className="h-px flex-1 bg-bg-surface" />
+        <div className="section-heading">
+          <h2>Work</h2>
+          <span className="rule" />
         </div>
         <div className="grid gap-5 md:grid-cols-2">
           {projects.map((project, i) => (
             <motion.article
               key={project.title}
-              className="glow-card rounded-2xl border border-bg-surface p-6 transition-transform duration-300 hover:-translate-y-1"
+              className="glow-card rounded-2xl p-6"
               initial={reduce ? false : { opacity: 0, y: 18, scale: 0.97 }}
               whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -43,7 +39,7 @@ export default function Projects() {
                 {project.stack.map((tech, ti) => (
                   <li
                     key={tech}
-                    className={`rounded-full border-l-2 bg-bg-surface px-2.5 py-1 font-mono text-xs text-text-secondary ${badgeAccents[ti % badgeAccents.length]}`}
+                    className={`rounded-full border-l-2 bg-white/5 px-2.5 py-1 font-mono text-xs text-text-secondary ${badgeAccents[ti % badgeAccents.length]}`}
                   >
                     {tech}
                   </li>
@@ -53,7 +49,7 @@ export default function Projects() {
                 href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-1 text-sm text-accent-teal"
+                className="mt-6 inline-flex items-center gap-1 text-sm text-accent"
               >
                 GitHub
                 <ArrowUpRight size={14} strokeWidth={1.5} />
