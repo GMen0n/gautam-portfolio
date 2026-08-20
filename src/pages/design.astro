@@ -14,14 +14,15 @@ import { designStacks } from "../data/design";
   <Navbar client:load />
   <main class="pt-24">
     <div class="section-shell">
-      <a href="/#skills" class="link-slide inline-flex items-center gap-2 text-sm text-text-secondary">
+      <a href="/#skills" class="telltale telltale-amber gap-2">
         <ArrowLeft size={16} strokeWidth={1.5} />
-        Back to Portfolio
+        Back
       </a>
-      <h1 class="mt-10 font-display text-4xl font-bold tracking-tight text-text-primary md:text-5xl">
-        Design Work
-      </h1>
-      <p class="mt-4 max-w-[640px] text-base leading-relaxed text-text-secondary">
+      <div class="section-heading mt-10">
+        <span class="section-led" aria-hidden="true"></span>
+        <h1>Design Work</h1>
+      </div>
+      <p class="max-w-[640px] text-base leading-relaxed text-text-secondary">
         Stacks of campaign work. Hover pauses the shuffle — click to open the full gallery.
       </p>
       <DesignGallery client:load stacks={designStacks} />

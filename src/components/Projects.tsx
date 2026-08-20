@@ -1,13 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { projects } from "../data/projects";
-
-const badgeAccents = [
-  "border-l-accent",
-  "border-l-accent-amber",
-  "border-l-accent-gold",
-  "border-l-brown",
-];
 
 export default function Projects() {
   const reduce = useReducedMotion();
@@ -23,9 +15,9 @@ export default function Projects() {
           {projects.map((project, i) => (
             <motion.article
               key={project.title}
-              className="glow-card rounded-2xl p-6"
-              initial={reduce ? false : { opacity: 0, y: 18, scale: 0.97 }}
-              whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
+              className="dash-module p-6"
+              initial={reduce ? false : { opacity: 0, y: 18 }}
+              whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
             >
@@ -36,10 +28,10 @@ export default function Projects() {
                 {project.description}
               </p>
               <ul className="mt-5 flex flex-wrap gap-2">
-                {project.stack.map((tech, ti) => (
+                {project.stack.map((tech) => (
                   <li
                     key={tech}
-                    className={`rounded-full border-l-2 bg-white/5 px-2.5 py-1 font-mono text-xs text-text-secondary ${badgeAccents[ti % badgeAccents.length]}`}
+                    className="border-l-2 border-lcd-amber bg-lcd-amber/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-text-secondary"
                   >
                     {tech}
                   </li>
@@ -49,10 +41,9 @@ export default function Projects() {
                 href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-1 text-sm text-accent"
+                className="telltale telltale-amber mt-6"
               >
                 GitHub
-                <ArrowUpRight size={14} strokeWidth={1.5} />
               </a>
             </motion.article>
           ))}
