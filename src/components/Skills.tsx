@@ -1,5 +1,4 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { certifications, designLeadership, skillGroups } from "../data/skills";
 
 export default function Skills() {
@@ -16,15 +15,13 @@ export default function Skills() {
           {skillGroups.map((group, i) => (
             <motion.article
               key={group.title}
-              className="glow-card rounded-2xl p-6"
-              initial={reduce ? false : { opacity: 0, y: 16, scale: 0.97 }}
-              whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
+              className="dash-module p-6"
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
             >
-              <h3
-                className={`font-display text-base font-medium uppercase tracking-[0.08em] ${group.accent}`}
-              >
+              <h3 className="font-dash text-sm font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
                 {group.title}
               </h3>
               <p className="mt-4 text-[15px] leading-relaxed text-text-secondary">
@@ -35,13 +32,13 @@ export default function Skills() {
         </div>
 
         <motion.div
-          className="glow-card mt-10 rounded-2xl p-6"
+          className="dash-module mt-10 p-6"
           initial={reduce ? false : { opacity: 0, y: 16 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h3 className="font-display text-base font-medium uppercase tracking-[0.08em] text-accent-amber">
+          <h3 className="font-dash text-sm font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
             Certifications
           </h3>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
@@ -60,7 +57,7 @@ export default function Skills() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h3 className="font-display text-base font-medium uppercase tracking-[0.08em] text-text-primary">
+          <h3 className="font-dash text-sm font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
             Design Work
           </h3>
           <ul className="mt-4 space-y-2 text-[15px] text-text-secondary">
@@ -71,12 +68,8 @@ export default function Skills() {
               </li>
             ))}
           </ul>
-          <a
-            href="/design"
-            className="link-slide mt-5 inline-flex items-center gap-2 text-sm text-accent"
-          >
+          <a href="/design" className="telltale telltale-amber mt-6">
             View Design Work
-            <ArrowRight size={14} strokeWidth={1.5} />
           </a>
         </motion.div>
       </div>

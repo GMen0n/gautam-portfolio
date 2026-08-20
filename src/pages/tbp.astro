@@ -10,9 +10,9 @@ import { tbp } from "../data/tbp";
   <Navbar client:load />
   <main class="pt-24">
     <div class="section-shell">
-      <a href="/" class="link-slide inline-flex items-center gap-2 text-sm text-text-secondary">
+      <a href="/" class="telltale telltale-amber gap-2">
         <ArrowLeft size={16} strokeWidth={1.5} />
-        Back to Portfolio
+        Back
       </a>
       <p class="mt-12 font-mono text-sm text-text-muted">{tbp.role}</p>
       <h1
@@ -26,28 +26,28 @@ import { tbp } from "../data/tbp";
         {tbp.description}
       </p>
 
-      <div
-        class="glow-card mt-12 aspect-video w-full overflow-hidden rounded-2xl"
-      >
-        {
-          tbp.youtubeId ? (
-            <iframe
-              class="h-full w-full"
-              src={`https://www.youtube.com/embed/${tbp.youtubeId}`}
-              title={`${tbp.name} featured video`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            />
-          ) : (
-            <div class="flex h-full items-center justify-center px-6 text-center text-text-muted">
-              Featured video will live here. Add a YouTube ID in src/data/tbp.ts.
-            </div>
-          )
-        }
+      <div class="dash-module dash-bezel mt-12 w-full">
+        <div class="aspect-video w-full overflow-hidden rounded-[0.28rem] bg-cabin-black">
+          {
+            tbp.youtubeId ? (
+              <iframe
+                class="h-full w-full"
+                src={`https://www.youtube.com/embed/${tbp.youtubeId}`}
+                title={`${tbp.name} featured video`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              />
+            ) : (
+              <div class="flex h-full items-center justify-center px-4 text-center text-sm text-text-muted md:px-6 md:text-base">
+                Featured video will live here. Add a YouTube ID in src/data/tbp.ts.
+              </div>
+            )
+          }
+        </div>
       </div>
 
       <div class="mt-12 max-w-[640px]">
-        <h2 class="font-display text-xs font-medium uppercase tracking-[0.08em] text-text-muted">
+        <h2 class="font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
           What I Do
         </h2>
         <p class="mt-4 text-lg text-text-secondary">{tbp.roles.join(" · ")}</p>
