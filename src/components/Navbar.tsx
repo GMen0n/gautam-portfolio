@@ -22,19 +22,13 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
-        <a
-          href="/"
-          className="font-display text-sm font-semibold tracking-[0.08em] text-text-primary"
-        >
+        <a href="/" className="nav-dash">
           {profile.name}
         </a>
-        <ul className="hidden items-center gap-7 md:flex">
+        <ul className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
             <li key={item.href}>
-              <a
-                href={item.href}
-                className="text-sm font-medium text-text-secondary transition-colors hover:text-accent"
-              >
+              <a href={item.href} className="nav-dash">
                 {item.label}
               </a>
             </li>
@@ -42,7 +36,7 @@ export default function Navbar() {
         </ul>
         <button
           type="button"
-          className="inline-flex rounded-md p-2 text-text-primary md:hidden"
+          className="nav-dash-icon inline-flex rounded-md p-2 md:hidden"
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
@@ -56,7 +50,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="block py-2 text-base text-text-secondary hover:text-accent"
+                className="nav-dash block py-2"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
