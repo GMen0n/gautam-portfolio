@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { X } from "lucide-react";
 import type { DesignPiece, DesignStack } from "../data/design";
 
 type Props = {
@@ -8,6 +8,52 @@ type Props = {
 
 const SHUFFLE_MS = 2800;
 const VISIBLE_BACK = 3;
+const SIGNAL_MS = 2100;
+
+function TurnSignalIcon({ dir }: { dir: "left" | "right" }) {
+  const d =
+    dir === "left"
+      ? "M14 3.2 L3.2 12 L14 20.8 V16.1 H28.5 V7.9 H14 Z"
+      : "M18 3.2 L28.8 12 L18 20.8 V16.1 H3.5 V7.9 H18 Z";
+  return (
+    <svg viewBox="0 0 32 24" className="h-9 w-12" aria-hidden>
+      <path
+        d={d}
+        fill="currentColor"
+        stroke="currentColor"
+        strokeWidth="2.4"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function IndicatorButton({
+  dir,
+  blinking,
+  className,
+  onClick,
+}: {
+  dir: "left" | "right";
+  blinking: boolean;
+  className: string;
+  onClick: (e?: React.MouseEvent) => void;
+}) {
+  return (
+    <button
+      type="button"
+      className={`gallery-indicator inline-flex items-center justify-center ${blinking ? "is-blinking" : ""} ${className}`}
+      aria-label={dir === "left" ? "Previous image" : "Next image"}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick(e);
+      }}
+    >
+      <TurnSignalIcon dir={dir} />
+    </button>
+  );
+}
 
 function StackCard({
   stack,
@@ -92,22 +138,40 @@ export default function DesignGallery({ stacks }: Props) {
   const [open, setOpen] = useState(false);
   const [activeStack, setActiveStack] = useState<DesignStack | null>(null);
   const [index, setIndex] = useState(0);
+  const [signal, setSignal] = useState<"left" | "right" | null>(null);
+  const [blinkNonce, setBlinkNonce] = useState(0);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const signalTimer = useRef(0);
 
   const pieces: DesignPiece[] = activeStack?.pieces ?? [];
+
+  const flash = useCallback((side: "left" | "right") => {
+    setSignal(side);
+    setBlinkNonce((n) => n + 1);
+    window.clearTimeout(signalTimer.current);
+    signalTimer.current = window.setTimeout(() => setSignal(null), SIGNAL_MS);
+  }, []);
 
   const close = useCallback(() => {
     setOpen(false);
     setActiveStack(null);
+    setSignal(null);
+    window.clearTimeout(signalTimer.current);
   }, []);
 
   const prev = useCallback(() => {
+    flash("left");
     setIndex((i) => (i - 1 + pieces.length) % pieces.length);
-  }, [pieces.length]);
+  }, [flash, pieces.length]);
 
   const next = useCallback(() => {
+    flash("right");
     setIndex((i) => (i + 1) % pieces.length);
-  }, [pieces.length]);
+  }, [flash, pieces.length]);
+
+  useEffect(() => {
+    return () => window.clearTimeout(signalTimer.current);
+  }, []);
 
   const openStack = (stack: DesignStack, startIndex: number) => {
     setActiveStack(stack);
@@ -120,8 +184,14 @@ export default function DesignGallery({ stacks }: Props) {
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prev();
+      }
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        next();
+      }
     };
 
     const prevOverflow = document.body.style.overflow;
@@ -185,29 +255,21 @@ export default function DesignGallery({ stacks }: Props) {
             <X size={20} strokeWidth={1.5} />
           </button>
 
-          <button
-            type="button"
-            className="glass-pill absolute top-1/2 left-3 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-text-primary sm:inline-flex md:left-6"
-            aria-label="Previous image"
-            onClick={(e) => {
-              e.stopPropagation();
-              prev();
-            }}
-          >
-            <ChevronLeft size={22} strokeWidth={1.5} />
-          </button>
+          <IndicatorButton
+            key={`left-${blinkNonce}`}
+            dir="left"
+            blinking={signal === "left"}
+            className="absolute top-1/2 left-4 z-20 hidden -translate-y-1/2 sm:inline-flex md:left-8"
+            onClick={prev}
+          />
 
-          <button
-            type="button"
-            className="glass-pill absolute top-1/2 right-3 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-text-primary sm:inline-flex md:right-6"
-            aria-label="Next image"
-            onClick={(e) => {
-              e.stopPropagation();
-              next();
-            }}
-          >
-            <ChevronRight size={22} strokeWidth={1.5} />
-          </button>
+          <IndicatorButton
+            key={`right-${blinkNonce}`}
+            dir="right"
+            blinking={signal === "right"}
+            className="absolute top-1/2 right-4 z-20 hidden -translate-y-1/2 sm:inline-flex md:right-8"
+            onClick={next}
+          />
 
           <figure
             className="relative z-10 flex max-h-[min(92vh,900px)] w-full max-w-5xl flex-col items-center"
@@ -232,23 +294,21 @@ export default function DesignGallery({ stacks }: Props) {
               </p>
             </figcaption>
 
-            <div className="mt-5 flex items-center gap-3 sm:hidden">
-              <button
-                type="button"
-                className="glass-pill inline-flex h-11 w-11 items-center justify-center rounded-full text-text-primary"
-                aria-label="Previous image"
+            <div className="mt-5 flex items-center gap-8 sm:hidden">
+              <IndicatorButton
+                key={`m-left-${blinkNonce}`}
+                dir="left"
+                blinking={signal === "left"}
+                className="inline-flex"
                 onClick={prev}
-              >
-                <ChevronLeft size={22} strokeWidth={1.5} />
-              </button>
-              <button
-                type="button"
-                className="glass-pill inline-flex h-11 w-11 items-center justify-center rounded-full text-text-primary"
-                aria-label="Next image"
+              />
+              <IndicatorButton
+                key={`m-right-${blinkNonce}`}
+                dir="right"
+                blinking={signal === "right"}
+                className="inline-flex"
                 onClick={next}
-              >
-                <ChevronRight size={22} strokeWidth={1.5} />
-              </button>
+              />
             </div>
           </figure>
         </div>

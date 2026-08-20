@@ -187,6 +187,8 @@ export default function Hero() {
       onPointerLeave={onPointerLeave}
     >
       <div className="hero-gradient absolute inset-0 -z-10" aria-hidden />
+      <div className="hero-illumination" aria-hidden />
+      <div className="hero-grain" aria-hidden />
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
         {/* Trail (orange only) — under the head */}
         <div ref={trailLayerRef} className="hero-trail-layer" />
@@ -203,40 +205,38 @@ export default function Hero() {
       />
 
       <div className="section-shell relative">
-        <motion.p className="mb-6 font-mono text-sm text-text-muted" {...fade(0)}>
-          {profile.handle}
-        </motion.p>
-        <motion.h1
-          className="font-display text-[36px] font-bold uppercase leading-[1.05] tracking-[0.1em] text-text-primary sm:text-5xl md:text-6xl lg:text-7xl"
-          {...fade(0)}
-        >
-          Gautam Menon
-        </motion.h1>
-        <div className="mt-8 max-w-2xl space-y-2 text-lg leading-relaxed text-text-secondary md:text-xl">
-          {profile.taglineLines.map((line, i) => (
-            <motion.p key={line.accent + line.rest} {...fade(0.15 * (i + 1))}>
-              {line.prefix}
-              <span className="text-accent">{line.accent}</span>
-              {line.rest}
-            </motion.p>
-          ))}
-        </div>
-        <motion.div className="mt-10 flex flex-wrap gap-3" {...fade(0.5)}>
-          <a
-            href="/#contact"
-            className="cta-glow rounded-full px-6 py-3 text-sm font-medium text-white"
-          >
+        <motion.div className="hero-display" {...fade(0)}>
+          <span className="hero-handle-pill mb-5 inline-flex items-center rounded-full px-3 py-[3px] font-segment text-[10px] font-bold uppercase tracking-[0.2em] sm:text-xs">
+            {profile.handle}
+          </span>
+          <h1 className="hero-name font-segment text-[32px] font-bold uppercase leading-[1.12] tracking-[0.12em] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem]">
+            Gautam Menon
+          </h1>
+          <div className="hero-ticker mt-8" aria-label={profile.taglineLines.map((l) => `${l.prefix}${l.accent}${l.rest}`).join(" ")}>
+            <div className="hero-ticker-track">
+              {[0, 1].map((copy) => (
+                <p key={copy} className="hero-ticker-copy">
+                  {profile.taglineLines.map((line, i) => (
+                    <span key={line.accent + line.rest}>
+                      {i > 0 && <span className="hero-ticker-sep"> · </span>}
+                      {`${line.prefix}${line.accent}${line.rest}`}
+                    </span>
+                  ))}
+                </p>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+        <motion.div className="mt-10 flex flex-wrap items-center gap-4" {...fade(0.35)}>
+          <a href="/#contact" className="telltale telltale-red">
             Get in Touch
           </a>
-          <a
-            href="/#work"
-            className="glass-pill inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-text-primary transition-colors hover:border-accent/40"
-          >
+          <a href="/#work" className="telltale telltale-amber gap-2">
             See My Work
-            <ArrowDown size={16} strokeWidth={1.5} />
+            <ArrowDown size={16} strokeWidth={2.25} />
           </a>
         </motion.div>
-        <motion.p className="mt-12 text-sm text-text-muted" {...fade(0.6)}>
+        <motion.p className="hero-display-meta mt-12 text-sm" {...fade(0.5)}>
           {profile.location}
           <span className="mx-2">·</span>
           {profile.study}
