@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navItems, profile } from "../data/links";
+import { useSectionSpy } from "../hooks/useSectionSpy";
 
 const SECTION_IDS = navItems.map((item) => item.href.split("#")[1]);
-const LOCK_MS = 700;
 
 function sectionId(href: string) {
   return href.split("#")[1] ?? "";
@@ -12,81 +12,13 @@ function sectionId(href: string) {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("");
-  const activeRef = useRef("");
-  const lockUntil = useRef(0);
-  const ratios = useRef<Record<string, number>>({});
-
-  const commit = (id: string) => {
-    if (id === activeRef.current) return;
-    activeRef.current = id;
-    setActive(id);
-  };
-
-  const lockTo = (id: string) => {
-    lockUntil.current = performance.now() + LOCK_MS;
-    commit(id);
-  };
+  const { active, lockTo } = useSectionSpy(SECTION_IDS);
 
   useEffect(() => {
     const onScrollChrome = () => setScrolled(window.scrollY > 12);
     onScrollChrome();
     window.addEventListener("scroll", onScrollChrome, { passive: true });
-
-    const pick = () => {
-      if (performance.now() < lockUntil.current) return;
-
-      let best = "";
-      let bestR = 0;
-      for (const id of SECTION_IDS) {
-        const r = ratios.current[id] ?? 0;
-        if (r > bestR) {
-          bestR = r;
-          best = id;
-        }
-      }
-
-      const currentR = ratios.current[activeRef.current] ?? 0;
-      if (bestR < 0.12) {
-        if (window.scrollY < 80) commit("");
-        return;
-      }
-      // Hysteresis: don't hop unless the new section is clearly more visible
-      if (best === activeRef.current) return;
-      if (currentR > 0 && bestR < currentR + 0.14) return;
-      commit(best);
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          ratios.current[entry.target.id] = entry.intersectionRatio;
-        }
-        pick();
-      },
-      {
-        root: null,
-        rootMargin: "-28% 0px -48% 0px",
-        threshold: [0, 0.08, 0.16, 0.28, 0.4, 0.55, 0.75, 1],
-      },
-    );
-
-    for (const id of SECTION_IDS) {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    }
-
-    const onHash = () => {
-      const id = window.location.hash.replace("#", "");
-      if (SECTION_IDS.includes(id)) lockTo(id);
-    };
-    window.addEventListener("hashchange", onHash);
-
-    return () => {
-      window.removeEventListener("scroll", onScrollChrome);
-      window.removeEventListener("hashchange", onHash);
-      observer.disconnect();
-    };
+    return () => window.removeEventListener("scroll", onScrollChrome);
   }, []);
 
   return (

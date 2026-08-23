@@ -9,10 +9,12 @@ import Skills from "../components/Skills";
 import Research from "../components/Research.astro";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer.astro";
+import PageIndicator from "../components/PageIndicator";
 ---
 
 <BaseLayout title="Gautam Menon — AI that ships">
   <Navbar client:load />
+  <PageIndicator client:load />
   <main>
     <Hero client:load />
     <About />
