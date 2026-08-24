@@ -24,18 +24,28 @@ import { education } from "../data/education";
       </a>
     </div>
     <div class="mt-14 max-w-[720px]">
-      <h3 class="font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
+      <h3
+        class="font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright"
+      >
         Education
       </h3>
       <ul class="mt-5 space-y-5">
         {
           education.map((item) => (
             <li class="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-1">
-              <p class="font-mono text-[13px] tabular-nums text-text-muted">{item.dates}</p>
+              <p class="font-mono text-[13px] tabular-nums text-text-muted">
+                {item.dates}
+              </p>
               <div>
-                <p class="font-display text-base font-medium text-text-primary">{item.school}</p>
-                <p class="mt-0.5 text-sm text-text-secondary">{item.credential}</p>
-                {item.detail && <p class="mt-1 text-sm text-text-muted">{item.detail}</p>}
+                <p class="font-display text-base font-medium text-text-primary">
+                  {item.school}
+                </p>
+                <p class="mt-0.5 text-sm text-text-secondary">
+                  {item.credential}
+                </p>
+                {item.detail && (
+                  <p class="mt-1 text-sm text-text-muted">{item.detail}</p>
+                )}
               </div>
             </li>
           ))

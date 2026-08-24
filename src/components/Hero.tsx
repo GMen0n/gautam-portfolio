@@ -32,10 +32,10 @@ export default function Hero() {
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 16, scale: 0.97 },
-          animate: { opacity: 1, y: 0, scale: 1 },
-          transition: { duration: 0.5, ease: "easeOut" as const, delay },
-        };
+        initial: { opacity: 0, y: 16, scale: 0.97 },
+        animate: { opacity: 1, y: 0, scale: 1 },
+        transition: { duration: 0.5, ease: "easeOut" as const, delay },
+      };
 
   return (
     <section

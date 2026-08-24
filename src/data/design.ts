@@ -2,6 +2,8 @@ export type DesignPiece = {
   title: string;
   context: string;
   image: string;
+  type?: "image" | "figma";
+  embedUrl?: string;
 };
 
 export type DesignStack = {
@@ -54,7 +56,23 @@ const maaya25Pieces: DesignPiece[] = [
   },
 ];
 
+const nuraPieces: DesignPiece[] = [
+  {
+    title: "NURA Prototype",
+    context: "Interactive Prototype",
+    image: "https://placehold.co/800x450/1a1a1c/F0B23A?text=NURA+Prototype",
+    type: "figma",
+    embedUrl: "https://embed.figma.com/proto/8ISWUvRuEB1crhEHiGPyon/NURA?node-id=316-10&page-id=0%3A1&starting-point-node-id=316%3A10&embed-host=share",
+  },
+];
+
 export const designStacks: DesignStack[] = [
+  {
+    id: "nura",
+    label: "NURA",
+    description: "NURA Interactive Figma Prototype",
+    pieces: nuraPieces,
+  },
   {
     id: "maaya25",
     label: "maaya25",

@@ -23,11 +23,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors ${
-        scrolled || open
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors ${scrolled || open
           ? "glass border-white/10"
           : "border-transparent bg-transparent"
-      }`}
+        }`}
     >
       <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
         <a href="/" className="nav-dash" onClick={() => lockTo("")}>

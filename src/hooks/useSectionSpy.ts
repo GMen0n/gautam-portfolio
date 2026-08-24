@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
 const LOCK_MS = 700;
+/** Viewport line used to decide which section is active (from top). */
+const SPY_LINE = 0.32;
 
 export function useSectionSpy(
   ids: readonly string[],
@@ -10,7 +12,6 @@ export function useSectionSpy(
   const [active, setActive] = useState(topId);
   const activeRef = useRef(topId);
   const lockUntil = useRef(0);
-  const ratios = useRef<Record<string, number>>({});
   const idsRef = useRef(ids);
   const topIdRef = useRef(topId);
   idsRef.current = ids;
@@ -31,56 +32,44 @@ export function useSectionSpy(
     const pick = () => {
       if (performance.now() < lockUntil.current) return;
 
-      const list = idsRef.current;
-      let best = "";
-      let bestR = 0;
-      for (const id of list) {
-        const r = ratios.current[id] ?? 0;
-        if (r > bestR) {
-          bestR = r;
-          best = id;
-        }
-      }
-
-      const currentR = ratios.current[activeRef.current] ?? 0;
-      if (bestR < 0.12) {
-        if (window.scrollY < 80) commit(topIdRef.current);
+      if (window.scrollY < 80) {
+        commit(topIdRef.current);
         return;
       }
-      if (best === activeRef.current) return;
-      if (currentR > 0 && bestR < currentR + 0.14) return;
-      commit(best);
+
+      const line = window.innerHeight * SPY_LINE;
+      let current = topIdRef.current;
+
+      // Last section whose top has crossed the spy line wins.
+      for (const id of idsRef.current) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= line) current = id;
+      }
+
+      commit(current);
     };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          ratios.current[entry.target.id] = entry.intersectionRatio;
-        }
-        pick();
-      },
-      {
-        root: null,
-        rootMargin: "-28% 0px -48% 0px",
-        threshold: [0, 0.08, 0.16, 0.28, 0.4, 0.55, 0.75, 1],
-      },
-    );
-
-    for (const id of idsRef.current) {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    }
 
     const onHash = () => {
       const id = window.location.hash.replace("#", "");
       if (idsRef.current.includes(id)) lockTo(id);
     };
+
+    window.addEventListener("scroll", pick, { passive: true });
+    window.addEventListener("resize", pick);
     window.addEventListener("hashchange", onHash);
     onHash();
+    pick();
+    // Islands / late layout: re-check shortly after mount.
+    const t1 = window.setTimeout(pick, 120);
+    const t2 = window.setTimeout(pick, 500);
 
     return () => {
+      window.removeEventListener("scroll", pick);
+      window.removeEventListener("resize", pick);
       window.removeEventListener("hashchange", onHash);
-      observer.disconnect();
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
     };
   }, []);
 
