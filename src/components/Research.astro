@@ -9,14 +9,20 @@ import { tbp } from "../data/tbp";
     <SectionHeader title="Research & Leadership" />
 
     <article class="max-w-[800px]">
-      <h3 class="font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
+      <h3
+        class="font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright"
+      >
         Research
       </h3>
-      <h4 class="mt-3 font-display text-2xl font-semibold leading-snug text-text-primary">
+      <h4
+        class="mt-3 font-display text-2xl font-semibold leading-snug text-text-primary"
+      >
         {research.title}
       </h4>
       <p class="mt-2 font-mono text-sm text-text-muted">{research.status}</p>
-      <ul class="mt-5 space-y-2 text-[15px] leading-relaxed text-text-secondary">
+      <ul
+        class="mt-5 space-y-2 text-[15px] leading-relaxed text-text-secondary"
+      >
         {
           research.bullets.map((bullet) => (
             <li class="flex gap-2">
@@ -34,21 +40,27 @@ import { tbp } from "../data/tbp";
       >
         BT / AUX
       </span>
-      <p class="mt-4 font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
+      <p
+        class="mt-4 font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright"
+      >
         {tbp.role}
       </p>
-      <h3 class="mt-2 font-display text-2xl font-semibold text-text-primary">{tbp.name}</h3>
-      <p class="mt-3 max-w-[640px] text-[15px] leading-relaxed text-text-secondary">
+      <h3 class="mt-2 font-display text-2xl font-semibold text-text-primary">
+        {tbp.name}
+      </h3>
+      <p
+        class="mt-3 max-w-[640px] text-[15px] leading-relaxed text-text-secondary"
+      >
         {tbp.description}
       </p>
       <p class="mt-4 text-sm text-text-muted">Roles: {tbp.roles.join(" · ")}</p>
-      <a href="/tbp" class="telltale telltale-amber mt-6">
-        Explore TBP
-      </a>
+      <a href="/tbp" class="telltale telltale-amber mt-6"> Explore TBP </a>
     </article>
 
     <article class="mt-12 max-w-[800px]">
-      <h3 class="font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
+      <h3
+        class="font-dash text-xs font-bold uppercase tracking-[0.12em] text-lcd-amber-bright"
+      >
         Design Leadership
       </h3>
       <ul class="mt-4 space-y-3 text-[15px] text-text-secondary">

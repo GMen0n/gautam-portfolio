@@ -38,12 +38,10 @@
   --brown: #453027;
   --glow: rgba(255, 109, 41, 0.45);
   --gradient-warm: linear-gradient(135deg, #ff6d29, #e8a84a, #ffd97d);
-  --gradient-subtle: linear-gradient(
-    135deg,
-    rgba(255, 109, 41, 0.2),
-    rgba(232, 168, 74, 0.12),
-    rgba(255, 217, 125, 0.08)
-  );
+  --gradient-subtle: linear-gradient(135deg,
+      rgba(255, 109, 41, 0.2),
+      rgba(232, 168, 74, 0.12),
+      rgba(255, 217, 125, 0.08));
 }
 
 @theme inline {
@@ -211,7 +209,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
-.dash-module > * {
+.dash-module>* {
   position: relative;
   z-index: 2;
 }
@@ -423,24 +421,20 @@ body {
   opacity: 0.04;
   background-image: radial-gradient(circle, rgba(255, 196, 140, 0.45) 0.55px, transparent 0.85px);
   background-size: 8px 8px;
-  mask-image: linear-gradient(
-    90deg,
-    #000 0%,
-    #000 16%,
-    transparent 30%,
-    transparent 70%,
-    #000 84%,
-    #000 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    #000 0%,
-    #000 16%,
-    transparent 30%,
-    transparent 70%,
-    #000 84%,
-    #000 100%
-  );
+  mask-image: linear-gradient(90deg,
+      #000 0%,
+      #000 16%,
+      transparent 30%,
+      transparent 70%,
+      #000 84%,
+      #000 100%);
+  -webkit-mask-image: linear-gradient(90deg,
+      #000 0%,
+      #000 16%,
+      transparent 30%,
+      transparent 70%,
+      #000 84%,
+      #000 100%);
 }
 
 .hero-bezel {
@@ -451,14 +445,12 @@ body {
   z-index: -8;
   height: 1px;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 176, 90, 0.1) 18%,
-    rgba(255, 176, 90, 0.16) 50%,
-    rgba(255, 176, 90, 0.1) 82%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 176, 90, 0.1) 18%,
+      rgba(255, 176, 90, 0.16) 50%,
+      rgba(255, 176, 90, 0.1) 82%,
+      transparent 100%);
 }
 
 .hero-wash {
@@ -475,6 +467,7 @@ body {
     transform: translate3d(-4%, 2%, 0);
     opacity: 0.7;
   }
+
   100% {
     transform: translate3d(5%, -3%, 0);
     opacity: 1;
@@ -544,18 +537,16 @@ body {
     radial-gradient(circle at 71% 63%, rgba(255, 178, 34, 0.12) 0 1px, transparent 2px),
     radial-gradient(circle at 42% 79%, rgba(255, 220, 110, 0.1) 0 0.8px, transparent 1.8px),
     repeating-linear-gradient(0deg, rgba(255, 230, 145, 0.035) 0 1px, transparent 1px 3px),
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       rgba(255, 190, 60, 0.05),
       transparent 18%,
       rgba(255, 210, 90, 0.05) 50%,
       transparent 82%,
-      rgba(255, 170, 30, 0.05)
-    );
+      rgba(255, 170, 30, 0.05));
   background-size: 31px 29px, 37px 33px, 43px 41px, 100% 3px, 100% 100%;
 }
 
-.hero-display > * {
+.hero-display>* {
   position: relative;
   z-index: 1;
 }
@@ -573,13 +564,11 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(70, 28, 0, 0.1) 2px,
-    rgba(70, 28, 0, 0.1) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(70, 28, 0, 0.1) 2px,
+      rgba(70, 28, 0, 0.1) 4px);
 }
 
 .hero-display-glass::after {
@@ -596,6 +585,7 @@ body {
   0% {
     top: -40px;
   }
+
   100% {
     top: 100%;
   }
@@ -661,14 +651,14 @@ body {
 }
 
 @keyframes gallery-indicator-blink {
+
   0%,
   49% {
     color: #7dff7a;
     filter:
-      drop-shadow(0 0 4px #c8ffc4)
-      drop-shadow(0 0 14px rgba(60, 255, 90, 0.95))
-      drop-shadow(0 0 28px rgba(20, 200, 60, 0.7));
+      drop-shadow(0 0 4px #c8ffc4) drop-shadow(0 0 14px rgba(60, 255, 90, 0.95)) drop-shadow(0 0 28px rgba(20, 200, 60, 0.7));
   }
+
   50%,
   100% {
     color: rgba(30, 80, 40, 0.45);
@@ -680,6 +670,7 @@ body {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
@@ -742,8 +733,7 @@ body {
 .nav-dash-icon {
   color: #ffc14d;
   filter:
-    drop-shadow(0 0 4px #ffe566)
-    drop-shadow(0 0 10px rgba(255, 180, 40, 0.85));
+    drop-shadow(0 0 4px #ffe566) drop-shadow(0 0 10px rgba(255, 180, 40, 0.85));
 }
 
 .nav-item {
@@ -828,6 +818,7 @@ body {
       0 0 6px #ff2a2a,
       0 0 12px rgba(200, 0, 0, 0.7);
   }
+
   100% {
     color: #ff3d3d;
     text-shadow:
@@ -846,6 +837,7 @@ body {
       0 0 14px rgba(255, 255, 255, 0.35);
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
   }
+
   100% {
     text-shadow:
       0 0 3px #ffffff,
@@ -859,9 +851,11 @@ body {
   0% {
     background-position: 0% 20%, 100% 0%, 50% 100%, 0% 0%;
   }
+
   50% {
     background-position: 40% 60%, 60% 40%, 20% 40%, 0% 0%;
   }
+
   100% {
     background-position: 80% 10%, 20% 80%, 70% 20%, 0% 0%;
   }
@@ -935,12 +929,15 @@ body {
   0% {
     transform: translate3d(-5%, -3%, 0) rotate(0deg) scale(1);
   }
+
   33% {
     transform: translate3d(6%, 4%, 0) rotate(5deg) scale(1.06);
   }
+
   66% {
     transform: translate3d(-3%, 7%, 0) rotate(-4deg) scale(1.03);
   }
+
   100% {
     transform: translate3d(-5%, -3%, 0) rotate(0deg) scale(1);
   }
@@ -950,9 +947,11 @@ body {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
+
   50% {
     transform: translate3d(10%, -12%, 0) scale(1.14);
   }
+
   100% {
     transform: translate3d(-12%, 8%, 0) scale(0.94);
   }
@@ -982,8 +981,7 @@ body {
     animation: none;
     color: #7dff7a;
     filter:
-      drop-shadow(0 0 6px #b8ffb0)
-      drop-shadow(0 0 16px rgba(40, 200, 60, 0.85));
+      drop-shadow(0 0 6px #b8ffb0) drop-shadow(0 0 16px rgba(40, 200, 60, 0.85));
   }
 
   .glow-card:hover,
@@ -1004,103 +1002,10 @@ body {
   .timeline-lamp {
     transition: none;
   }
-
-  .page-rail-selection {
-    transition: none;
-  }
 }
 
 .dash-footer {
   border-top: 1px solid color-mix(in srgb, var(--lcd-amber) 14%, transparent);
-}
-
-/* Page rail — variation of Shoh2008 / adeladel522 (Uiverse afraid-cat-83), cabin restyle. */
-.page-rail {
-  position: fixed;
-  top: 50%;
-  right: 1rem;
-  z-index: 40;
-  transform: translateY(-50%);
-}
-
-.page-rail-card {
-  --row: 2.15rem;
-  --gap: 0.12rem;
-  --pad: 0.28rem;
-  position: relative;
-  display: flex;
-  width: 10.25rem;
-  flex-direction: column;
-  gap: var(--gap);
-  overflow: hidden;
-  padding: var(--pad);
-  border-radius: 0.55rem;
-  background: var(--cabin-black);
-  border: 1px solid color-mix(in srgb, var(--lcd-amber) 22%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    inset 0 -10px 18px rgba(0, 0, 0, 0.62),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.35);
-}
-
-.page-rail-card input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.page-rail-card label {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  height: var(--row);
-  align-items: center;
-  padding: 0 0.85rem;
-  cursor: pointer;
-  font-family: var(--font-dash);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--lcd-amber-bright) 38%, #6a5a52);
-  transition: color 160ms ease;
-}
-
-.page-rail-card label:hover {
-  color: color-mix(in srgb, var(--lcd-amber-bright) 82%, #fff);
-}
-
-.page-rail-card input:checked + label {
-  color: #1a1004;
-  text-shadow: none;
-}
-
-.page-rail-card input:focus-visible + label {
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
-}
-
-.page-rail-selection {
-  position: absolute;
-  z-index: 0;
-  top: var(--pad);
-  left: var(--pad);
-  width: calc(100% - (var(--pad) * 2));
-  height: var(--row);
-  border-radius: 0.35rem;
-  pointer-events: none;
-  background: linear-gradient(180deg, var(--lcd-amber-bright), var(--lcd-amber));
-  box-shadow:
-    0 0 10px color-mix(in srgb, var(--lcd-amber) 55%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transform: translateY(calc(var(--i, 0) * (var(--row) + var(--gap))));
-  transition: transform 180ms cubic-bezier(0.22, 0.8, 0.28, 1);
 }
 
 .dash-footer-label {
