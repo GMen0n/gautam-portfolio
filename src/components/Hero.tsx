@@ -52,10 +52,10 @@ export default function Hero() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
           {...fade(0.35)}
         >
-          <a href="/#contact" className="telltale telltale-red">
+          <a href="/#contact" className="candy-button candy-button-fiery">
             Get in Touch
           </a>
-          <a href="/#work" className="telltale telltale-amber gap-2">
+          <a href="/#work" className="candy-button candy-button-orange gap-2">
             See My Work
             <ArrowDown size={16} strokeWidth={2.25} />
           </a>

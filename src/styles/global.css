@@ -286,6 +286,96 @@ body {
   }
 }
 
+.candy-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  padding: 0.75rem 1.6rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  border: 1px solid #ff9642;
+  background: radial-gradient(95% 60% at 50% 75%, #c84408 0%, #ff6d29 45%, #ff8f3d 100%);
+  box-shadow:
+    0px 4px 32px -6px rgba(255, 109, 41, 0.7),
+    inset 0px 1px 8px -2px #ffffff,
+    inset 0px -2px 6px rgba(180, 50, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.candy-button::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 12%;
+  width: 55%;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.75) 50%, transparent 100%);
+}
+
+.candy-button:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+  box-shadow:
+    0px 6px 36px -4px rgba(255, 109, 41, 0.9),
+    inset 0px 1px 8px -2px #ffffff,
+    inset 0px -2px 6px rgba(180, 50, 0, 0.4);
+}
+
+.candy-button:active {
+  transform: scale(0.96) rotate(0.5deg);
+}
+
+.candy-button-orange {
+  border-color: #ff9642;
+  background: radial-gradient(95% 60% at 50% 75%, #c84408 0%, #ff6d29 45%, #ff8f3d 100%);
+  box-shadow:
+    0px 4px 32px -6px rgba(255, 109, 41, 0.7),
+    inset 0px 1px 8px -2px #ffffff,
+    inset 0px -2px 6px rgba(180, 50, 0, 0.5);
+}
+
+.candy-button-amber {
+  border-color: #ffb347;
+  background: radial-gradient(95% 60% at 50% 75%, #b45309 0%, #d97706 45%, #f59e0b 100%);
+  box-shadow:
+    0px 4px 32px -6px rgba(245, 158, 11, 0.7),
+    inset 0px 1px 8px -2px #ffffff,
+    inset 0px -2px 6px rgba(140, 55, 0, 0.5);
+}
+
+.candy-button-amber:hover {
+  box-shadow:
+    0px 6px 36px -4px rgba(245, 158, 11, 0.9),
+    inset 0px 1px 8px -2px #ffffff,
+    inset 0px -2px 6px rgba(140, 55, 0, 0.4);
+}
+
+.candy-button-fiery {
+  border-color: #ff7844;
+  background: radial-gradient(95% 60% at 50% 75%, #b91c1c 0%, #ea580c 45%, #ff6d29 100%);
+  box-shadow:
+    0px 4px 32px -6px rgba(234, 88, 12, 0.75),
+    inset 0px 1px 8px -2px #ffffff,
+    inset 0px -2px 6px rgba(140, 25, 10, 0.5);
+}
+
+.candy-button-fiery:hover {
+  box-shadow:
+    0px 6px 36px -4px rgba(234, 88, 12, 0.95),
+    inset 0px 1px 8px -2px #ffffff,
+    inset 0px -2px 6px rgba(140, 25, 10, 0.4);
+}
+
 .telltale {
   display: inline-flex;
   align-items: center;

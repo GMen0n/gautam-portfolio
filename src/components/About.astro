@@ -12,12 +12,14 @@ import { education } from "../data/education";
       {aboutText}
     </p>
     <div class="mt-8 flex flex-wrap items-center gap-4">
-      <span class="telltale telltale-amber">{availability}</span>
+      <span class="candy-button candy-button-orange text-sm cursor-default">
+        {availability}
+      </span>
       <a
         href={profile.resume}
         target="_blank"
         rel="noopener noreferrer"
-        class="telltale telltale-amber gap-2"
+        class="candy-button candy-button-amber gap-2"
       >
         <FileDown size={16} strokeWidth={2.25} />
         Resume
