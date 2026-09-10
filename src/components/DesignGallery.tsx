@@ -290,8 +290,8 @@ export default function DesignGallery({ stacks }: Props) {
             count={120}
             radius={400}
             tilt={55}
-            itemWidth={48}
-            itemHeight={68}
+            itemWidth={72}
+            itemHeight={48}
             autoRotate={true}
             autoRotateSpeed={3.2}
             onItemClick={openPiece}

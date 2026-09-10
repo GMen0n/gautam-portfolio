@@ -28,7 +28,7 @@ function TimelineItem({
       <h3 className="font-display text-xl font-semibold text-text-primary">{job.role}</h3>
       <p className="mt-1 text-base font-medium text-accent-amber">{job.company}</p>
       <p className="mt-1 font-mono text-[13px] text-text-muted">{job.dates}</p>
-      <ul className="mt-4 max-w-[720px] space-y-2 text-[15px] leading-relaxed text-text-secondary">
+      <ul className="mt-4 max-w-[720px] space-y-2 text-[17px] font-medium leading-relaxed text-text-secondary">
         {job.bullets.map((bullet) => (
           <li key={bullet} className="flex gap-2">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-text-muted" />

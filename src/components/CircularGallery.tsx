@@ -267,7 +267,7 @@ export function CircularGallery({
           >
             <img
               ref={previewRef}
-              src={activePiece.image}
+              src={activePiece.imageLandscape || activePiece.image}
               alt={activePiece.title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               draggable={false}
@@ -317,7 +317,7 @@ export function CircularGallery({
               }}
             >
               <img
-                src={piece.image}
+                src={piece.imageLandscape || piece.image}
                 alt={piece.title}
                 className="h-full w-full object-cover transition-all duration-300 hover:scale-115 hover:brightness-120"
                 draggable={false}
