@@ -1,32 +1,9 @@
-import { useCallback, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { profile } from "../data/links";
-import DotDistortionField, { type PointerState } from "./DotDistortionField";
 
 export default function Hero() {
   const reduce = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-  const pointer = useRef<PointerState>({ x: 0, y: 0, inside: false });
-
-  const onPointerMove = useCallback(
-    (e: React.PointerEvent<HTMLElement>) => {
-      if (reduce) return;
-      const el = sectionRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      pointer.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-        inside: true,
-      };
-    },
-    [reduce],
-  );
-
-  const onPointerLeave = useCallback(() => {
-    pointer.current = { ...pointer.current, inside: false };
-  }, []);
 
   const fade = (delay: number) =>
     reduce
@@ -40,28 +17,9 @@ export default function Hero() {
   return (
     <section
       id="home"
-      ref={sectionRef}
       className="hero-stage relative flex min-h-screen items-center overflow-hidden pt-20"
-      onPointerMove={onPointerMove}
-      onPointerLeave={onPointerLeave}
     >
-      <div className="hero-gradient absolute inset-0 -z-10" aria-hidden />
-      <div className="hero-illumination" aria-hidden />
-      <div className="hero-vignette" aria-hidden />
       <div className="hero-bezel" aria-hidden />
-      <div className="hero-wash" aria-hidden />
-      <div className="hero-grain" aria-hidden />
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
-        <DotDistortionField pointer={pointer} />
-      </div>
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, transparent 70%, var(--bg-base) 100%)",
-        }}
-        aria-hidden
-      />
 
       <div className="section-shell relative flex flex-col items-center text-center">
         <motion.div className="hero-display" {...fade(0)}>
