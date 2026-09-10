@@ -68,7 +68,7 @@ export default function Skills() {
               </li>
             ))}
           </ul>
-          <a href="/design" className="telltale telltale-amber mt-6">
+          <a href="/design" className="candy-button candy-button-orange mt-6">
             View Design Work
           </a>
         </motion.div>
