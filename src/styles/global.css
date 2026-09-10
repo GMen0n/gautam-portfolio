@@ -184,17 +184,24 @@ body {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: var(--cabin-black);
-  border: 1px solid color-mix(in srgb, var(--lcd-amber) 22%, transparent);
-  border-radius: 0.55rem;
+  background:
+    radial-gradient(130% 90% at 0% 0%, rgba(255, 120, 40, 0.18) 0%, rgba(255, 90, 20, 0.05) 45%, transparent 75%),
+    radial-gradient(100% 70% at 100% 100%, rgba(232, 168, 74, 0.12) 0%, transparent 60%),
+    linear-gradient(165deg, rgba(36, 20, 15, 0.62) 0%, rgba(16, 11, 10, 0.78) 100%);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255, 145, 60, 0.28);
+  border-radius: 0.85rem;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    inset 0 -10px 18px rgba(0, 0, 0, 0.62),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+    inset 0 1px 1px 0 rgba(255, 215, 140, 0.4),
+    inset 0 0 24px 0 rgba(255, 109, 41, 0.08),
+    0 12px 36px -4px rgba(0, 0, 0, 0.55),
+    0 0 1px 1px rgba(255, 120, 40, 0.12);
   transition:
-    transform 160ms ease,
-    box-shadow 160ms ease,
-    border-color 160ms ease;
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease;
 }
 
 .dash-module::before {
@@ -204,9 +211,33 @@ body {
   z-index: 1;
   pointer-events: none;
   border-radius: inherit;
-  opacity: 0.08;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 160, 60, 0.05) 30%,
+    transparent 55%,
+    rgba(255, 120, 40, 0.03) 100%
+  );
+  opacity: 0.95;
+}
+
+.dash-module::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 210, 120, 0.5) 35%,
+    rgba(255, 235, 170, 0.75) 50%,
+    rgba(255, 210, 120, 0.5) 65%,
+    transparent 100%
+  );
 }
 
 .dash-module>* {
@@ -215,13 +246,18 @@ body {
 }
 
 .dash-module:hover,
-.dash-module:focus-visible,
-.dash-module:active {
-  transform: translateY(1px);
-  border-color: color-mix(in srgb, var(--lcd-amber) 38%, transparent);
+.dash-module:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(255, 160, 60, 0.55);
+  background:
+    radial-gradient(130% 90% at 0% 0%, rgba(255, 130, 45, 0.24) 0%, rgba(255, 95, 25, 0.08) 45%, transparent 75%),
+    radial-gradient(100% 70% at 100% 100%, rgba(240, 178, 58, 0.16) 0%, transparent 60%),
+    linear-gradient(165deg, rgba(42, 24, 18, 0.68) 0%, rgba(18, 12, 11, 0.82) 100%);
   box-shadow:
-    inset 0 3px 10px rgba(0, 0, 0, 0.78),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.45);
+    inset 0 1px 2px 0 rgba(255, 235, 160, 0.6),
+    inset 0 0 30px 0 rgba(255, 115, 45, 0.15),
+    0 18px 45px -6px rgba(0, 0, 0, 0.65),
+    0 0 28px 0 rgba(255, 109, 41, 0.24);
 }
 
 .dash-bezel {
@@ -307,23 +343,41 @@ body {
 
 .telltale-amber {
   color: #fff6d0;
-  border-color: color-mix(in srgb, var(--lcd-amber) 50%, transparent);
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(255, 140, 40, 0.2) 0%, rgba(240, 160, 40, 0.05) 50%, transparent 80%),
+    linear-gradient(165deg, rgba(32, 18, 14, 0.6) 0%, rgba(14, 10, 9, 0.78) 100%);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(255, 160, 60, 0.38);
   text-shadow:
     0 0 2px #ffffff,
     0 0 8px #ffd24d,
     0 0 16px rgba(255, 180, 20, 0.85);
   box-shadow:
-    inset 0 1px 0 rgba(255, 230, 160, 0.12),
-    inset 0 -8px 14px rgba(0, 0, 0, 0.55),
-    0 0 14px rgba(255, 190, 40, 0.28),
-    0 8px 20px rgba(0, 0, 0, 0.4);
+    inset 0 1px 1px 0 rgba(255, 230, 160, 0.35),
+    inset 0 0 14px rgba(255, 120, 40, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(255, 160, 40, 0.18);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
 }
 
 .telltale-amber:hover,
 .telltale-amber:focus-visible,
 .telltale-amber:active {
   color: #fffceb;
-  border-color: rgba(255, 214, 80, 0.7);
+  border-color: rgba(255, 190, 80, 0.75);
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(255, 160, 50, 0.3) 0%, rgba(255, 110, 30, 0.08) 50%, transparent 80%),
+    linear-gradient(165deg, rgba(42, 24, 18, 0.72) 0%, rgba(20, 13, 11, 0.85) 100%);
+  box-shadow:
+    inset 0 1px 2px 0 rgba(255, 245, 180, 0.65),
+    inset 0 0 20px rgba(255, 130, 50, 0.2),
+    0 8px 24px -4px rgba(0, 0, 0, 0.5),
+    0 0 22px rgba(255, 180, 40, 0.4);
 }
 
 .preset-key {
@@ -333,32 +387,59 @@ body {
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.45rem;
-  padding: 0.85rem 1rem 1rem;
+  padding: 0.95rem 1.1rem 1.1rem;
   text-align: left;
+  border-radius: 0.7rem;
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(255, 130, 40, 0.18) 0%, rgba(240, 160, 40, 0.05) 50%, transparent 80%),
+    linear-gradient(165deg, rgba(32, 18, 14, 0.58) 0%, rgba(14, 10, 9, 0.74) 100%);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255, 155, 60, 0.28);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 220, 140, 0.4),
+    inset 0 0 16px 0 rgba(255, 110, 40, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    0 0 1px 1px rgba(255, 120, 40, 0.12);
+  transition:
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease;
+}
+
+.preset-key:hover,
+.preset-key:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 175, 70, 0.65);
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(255, 150, 45, 0.28) 0%, rgba(255, 110, 30, 0.08) 50%, transparent 80%),
+    linear-gradient(165deg, rgba(42, 24, 18, 0.7) 0%, rgba(20, 13, 11, 0.82) 100%);
+  box-shadow:
+    inset 0 1px 2px 0 rgba(255, 235, 160, 0.65),
+    inset 0 0 24px 0 rgba(255, 130, 50, 0.2),
+    0 10px 24px -4px rgba(0, 0, 0, 0.55),
+    0 0 22px 0 rgba(255, 110, 40, 0.28);
 }
 
 .dash-module:has(.preset-key):hover,
 .dash-module:has(.preset-key):focus-visible,
 .dash-module:has(.preset-key):active {
   transform: none;
-  border-color: color-mix(in srgb, var(--lcd-amber) 22%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    inset 0 -10px 18px rgba(0, 0, 0, 0.62),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.35);
 }
 
 .preset-key-email {
-  border-color: color-mix(in srgb, var(--lcd-amber-bright) 72%, transparent);
-  text-shadow:
-    0 0 2px #ffffff,
-    0 0 10px #ffd24d,
-    0 0 20px rgba(255, 193, 77, 0.95);
+  border-color: rgba(255, 193, 77, 0.45);
+}
+
+.preset-key-email:hover,
+.preset-key-email:focus-visible {
+  border-color: rgba(255, 200, 80, 0.85);
   box-shadow:
-    inset 0 1px 0 rgba(255, 230, 160, 0.16),
-    inset 0 -8px 14px rgba(0, 0, 0, 0.55),
-    0 0 18px rgba(255, 193, 77, 0.42),
-    0 8px 20px rgba(0, 0, 0, 0.4);
+    inset 0 1px 2px 0 rgba(255, 245, 180, 0.7),
+    inset 0 0 26px 0 rgba(255, 150, 50, 0.25),
+    0 12px 30px -4px rgba(0, 0, 0, 0.55),
+    0 0 26px rgba(255, 193, 77, 0.35);
 }
 
 .link-slide {

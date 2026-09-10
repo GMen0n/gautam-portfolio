@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import SiteBackground from "../components/SiteBackground";
 
 interface Props {
   title: string;
@@ -34,15 +35,7 @@ const {
     <title>{title}</title>
   </head>
   <body class="bg-bg-base text-text-primary antialiased">
-    <div
-      class="aurora-wrap pointer-events-none fixed inset-0 overflow-hidden"
-      aria-hidden="true"
-    >
-      <div class="aurora"></div>
-      <div class="blob blob-a"></div>
-      <div class="blob blob-b"></div>
-      <div class="blob blob-c"></div>
-    </div>
+    <SiteBackground client:load />
     <div class="relative z-10">
       <slot />
     </div>

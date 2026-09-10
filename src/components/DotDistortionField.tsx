@@ -25,7 +25,8 @@ const REST = "rgba(240, 178, 58, 0.22)";
 const LIT = "rgba(255, 193, 77, 0.95)";
 
 type Props = {
-  pointer: MutableRefObject<PointerState>;
+  pointer?: MutableRefObject<PointerState>;
+  scrollSpeed?: number;
 };
 
 function lerpColor(t: number) {
@@ -36,8 +37,10 @@ function lerpColor(t: number) {
   return `rgba(${r},${g},${b},${a})`;
 }
 
-export default function DotDistortionField({ pointer }: Props) {
+export default function DotDistortionField({ pointer, scrollSpeed = 1.0 }: Props = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fallbackPointer = useRef<PointerState>({ x: -1000, y: -1000, inside: false });
+  const activePointer = pointer ?? fallbackPointer;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -49,16 +52,29 @@ export default function DotDistortionField({ pointer }: Props) {
     const dots: Dot[] = [];
     let width = 0;
     let height = 0;
+    let cols = 0;
+    let rows = 0;
     let dpr = 1;
     let raf = 0;
     let last = performance.now();
     let visible = true;
     let running = false;
+    let scrollY = window.scrollY || 0;
+
+    const onScroll = () => {
+      scrollY = window.scrollY || 0;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     const build = () => {
       const rect = canvas.getBoundingClientRect();
       width = Math.max(1, rect.width);
       height = Math.max(1, rect.height);
+      const docHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        window.innerHeight,
+      );
       dpr = Math.min(DPR_CAP, window.devicePixelRatio || 1);
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
@@ -67,8 +83,8 @@ export default function DotDistortionField({ pointer }: Props) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       dots.length = 0;
-      const cols = Math.ceil(width / GAP) + 1;
-      const rows = Math.ceil(height / GAP) + 1;
+      cols = Math.ceil(width / GAP) + 1;
+      rows = Math.ceil(docHeight / GAP) + 1;
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
           const ox = col * GAP + (row % 2 === 0 ? 0 : GAP * 0.5);
@@ -90,59 +106,80 @@ export default function DotDistortionField({ pointer }: Props) {
     const drawStatic = () => {
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = REST;
-      for (const d of dots) {
-        ctx.beginPath();
-        ctx.arc(d.ox, d.oy, DOT_SIZE, 0, Math.PI * 2);
-        ctx.fill();
+      const scrollOffset = scrollY * scrollSpeed;
+      const rowStart = Math.max(0, Math.floor((scrollOffset - GAP) / GAP));
+      const rowEnd = Math.min(rows, Math.ceil((scrollOffset + height + GAP) / GAP));
+
+      for (let row = rowStart; row < rowEnd; row++) {
+        const startIdx = row * cols;
+        const endIdx = Math.min(dots.length, startIdx + cols);
+        for (let i = startIdx; i < endIdx; i++) {
+          const d = dots[i];
+          const screenY = d.oy - scrollOffset;
+          ctx.beginPath();
+          ctx.arc(d.ox, screenY, DOT_SIZE, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
     };
 
     const tick = (now: number) => {
       const dt = Math.min(0.04, (now - last) / 1000);
       last = now;
-      const mouse = pointer.current;
+      const mouse = activePointer.current;
+      const scrollOffset = scrollY * scrollSpeed;
 
       ctx.clearRect(0, 0, width, height);
 
-      for (const d of dots) {
-        d.phase += dt * TWINKLE * (0.6 + d.pulse);
-        const twinkle = 0.5 + 0.5 * Math.sin(d.phase);
+      const rowStart = Math.max(0, Math.floor((scrollOffset - GAP * 2) / GAP));
+      const rowEnd = Math.min(rows, Math.ceil((scrollOffset + height + GAP * 2) / GAP));
 
-        if (mouse.inside) {
-          const dx = d.x - mouse.x;
-          const dy = d.y - mouse.y;
-          const dist = Math.hypot(dx, dy) || 0.0001;
-          if (dist < MOUSE_RADIUS) {
-            const falloff = 1 - dist / MOUSE_RADIUS;
-            const f = falloff * falloff * PUSH;
-            d.vx += (dx / dist) * f * dt;
-            d.vy += (dy / dist) * f * dt;
+      for (let row = rowStart; row < rowEnd; row++) {
+        const startIdx = row * cols;
+        const endIdx = Math.min(dots.length, startIdx + cols);
+
+        for (let i = startIdx; i < endIdx; i++) {
+          const d = dots[i];
+          d.phase += dt * TWINKLE * (0.6 + d.pulse);
+          const twinkle = 0.5 + 0.5 * Math.sin(d.phase);
+          const screenY = d.y - scrollOffset;
+
+          if (mouse.inside) {
+            const dx = d.x - mouse.x;
+            const dy = screenY - mouse.y;
+            const dist = Math.hypot(dx, dy) || 0.0001;
+            if (dist < MOUSE_RADIUS) {
+              const falloff = 1 - dist / MOUSE_RADIUS;
+              const f = falloff * falloff * PUSH;
+              d.vx += (dx / dist) * f * dt;
+              d.vy += (dy / dist) * f * dt;
+            }
           }
-        }
 
-        d.vx += (d.ox - d.x) * RETURN * dt;
-        d.vy += (d.oy - d.y) * RETURN * dt;
-        d.vx *= DAMP;
-        d.vy *= DAMP;
-        d.x += d.vx * dt * 60;
-        d.y += d.vy * dt * 60;
+          d.vx += (d.ox - d.x) * RETURN * dt;
+          d.vy += (d.oy - d.y) * RETURN * dt;
+          d.vx *= DAMP;
+          d.vy *= DAMP;
+          d.x += d.vx * dt * 60;
+          d.y += d.vy * dt * 60;
 
-        let near = 0;
-        if (mouse.inside) {
-          const md = Math.hypot(d.x - mouse.x, d.y - mouse.y);
-          near = Math.max(0, 1 - md / MOUSE_RADIUS);
+          let near = 0;
+          if (mouse.inside) {
+            const md = Math.hypot(d.x - mouse.x, screenY - mouse.y);
+            near = Math.max(0, 1 - md / MOUSE_RADIUS);
+          }
+          const bright = Math.min(1, 0.18 + twinkle * d.pulse * 0.45 + near * 0.7);
+          ctx.fillStyle = bright > 0.55 ? LIT : lerpColor(bright);
+          if (bright > 0.72) {
+            ctx.shadowColor = LIT;
+            ctx.shadowBlur = 6 * bright;
+          } else {
+            ctx.shadowBlur = 0;
+          }
+          ctx.beginPath();
+          ctx.arc(d.x, screenY, DOT_SIZE + near * 0.7, 0, Math.PI * 2);
+          ctx.fill();
         }
-        const bright = Math.min(1, 0.18 + twinkle * d.pulse * 0.45 + near * 0.7);
-        ctx.fillStyle = bright > 0.55 ? LIT : lerpColor(bright);
-        if (bright > 0.72) {
-          ctx.shadowColor = LIT;
-          ctx.shadowBlur = 6 * bright;
-        } else {
-          ctx.shadowBlur = 0;
-        }
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, DOT_SIZE + near * 0.7, 0, Math.PI * 2);
-        ctx.fill();
       }
       ctx.shadowBlur = 0;
 
@@ -168,6 +205,12 @@ export default function DotDistortionField({ pointer }: Props) {
       start();
     }
 
+    const onResize = () => {
+      build();
+      if (reduce) drawStatic();
+    };
+    window.addEventListener("resize", onResize);
+
     const ro = new ResizeObserver(() => {
       build();
       if (reduce) drawStatic();
@@ -185,12 +228,42 @@ export default function DotDistortionField({ pointer }: Props) {
     );
     io.observe(canvas);
 
+    const handlePointerMove = (e: PointerEvent) => {
+      if (reduce) return;
+      fallbackPointer.current = {
+        x: e.clientX,
+        y: e.clientY,
+        inside: true,
+      };
+    };
+
+    const handlePointerLeave = () => {
+      fallbackPointer.current = {
+        x: -1000,
+        y: -1000,
+        inside: false,
+      };
+    };
+
+    if (!pointer) {
+      window.addEventListener("pointermove", handlePointerMove, { passive: true });
+      window.addEventListener("pointerleave", handlePointerLeave, { passive: true });
+      document.addEventListener("mouseleave", handlePointerLeave);
+    }
+
     return () => {
       stop();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
       ro.disconnect();
       io.disconnect();
+      if (!pointer) {
+        window.removeEventListener("pointermove", handlePointerMove);
+        window.removeEventListener("pointerleave", handlePointerLeave);
+        document.removeEventListener("mouseleave", handlePointerLeave);
+      }
     };
-  }, [pointer]);
+  }, [pointer, activePointer, scrollSpeed]);
 
   return <canvas ref={canvasRef} className="hero-dots" aria-hidden />;
 }
