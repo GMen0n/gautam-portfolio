@@ -15,7 +15,7 @@ export default function Skills() {
           {skillGroups.map((group, i) => (
             <motion.article
               key={group.title}
-              className="dash-module p-6"
+              className="p-6 rounded-xl bg-white/[0.03] border border-white/10"
               initial={reduce ? false : { opacity: 0, y: 16 }}
               whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
@@ -24,7 +24,7 @@ export default function Skills() {
               <h3 className="font-dash text-sm font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
                 {group.title}
               </h3>
-              <p className="mt-4 text-[15px] leading-relaxed text-text-secondary">
+              <p className="mt-4 text-[17px] font-medium leading-relaxed text-text-secondary">
                 {group.items.join(" · ")}
               </p>
             </motion.article>
@@ -32,7 +32,7 @@ export default function Skills() {
         </div>
 
         <motion.div
-          className="dash-module mt-10 p-6"
+          className="mt-10 p-6 rounded-xl bg-white/[0.03] border border-white/10"
           initial={reduce ? false : { opacity: 0, y: 16 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -43,7 +43,7 @@ export default function Skills() {
           </h3>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {certifications.map((cert) => (
-              <li key={cert} className="text-[15px] text-text-secondary">
+              <li key={cert} className="text-[17px] font-medium text-text-secondary">
                 {cert}
               </li>
             ))}
@@ -60,7 +60,7 @@ export default function Skills() {
           <h3 className="font-dash text-sm font-bold uppercase tracking-[0.12em] text-lcd-amber-bright">
             Design Work
           </h3>
-          <ul className="mt-4 space-y-2 text-[15px] text-text-secondary">
+          <ul className="mt-4 space-y-2 text-[17px] font-medium text-text-secondary">
             {designLeadership.map((item) => (
               <li key={item.title}>
                 <span className="text-text-primary">{item.title}</span>

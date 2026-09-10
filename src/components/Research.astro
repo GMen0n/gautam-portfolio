@@ -21,7 +21,7 @@ import { tbp } from "../data/tbp";
       </h4>
       <p class="mt-2 font-mono text-sm text-text-muted">{research.status}</p>
       <ul
-        class="mt-5 space-y-2 text-[15px] leading-relaxed text-text-secondary"
+        class="mt-5 space-y-2 text-[17px] font-medium leading-relaxed text-text-secondary"
       >
         {
           research.bullets.map((bullet) => (
@@ -49,12 +49,12 @@ import { tbp } from "../data/tbp";
         {tbp.name}
       </h3>
       <p
-        class="mt-3 max-w-[640px] text-[15px] leading-relaxed text-text-secondary"
+        class="mt-3 max-w-[640px] text-[17px] font-medium leading-relaxed text-text-secondary"
       >
         {tbp.description}
       </p>
       <p class="mt-4 text-sm text-text-muted">Roles: {tbp.roles.join(" · ")}</p>
-      <a href="/tbp" class="telltale telltale-amber mt-6"> Explore TBP </a>
+      <a href="/tbp" class="candy-button candy-button-amber mt-6"> Explore TBP </a>
     </article>
 
     <article class="mt-12 max-w-[800px]">
@@ -63,7 +63,7 @@ import { tbp } from "../data/tbp";
       >
         Design Leadership
       </h3>
-      <ul class="mt-4 space-y-3 text-[15px] font-semibold text-text-secondary">
+      <ul class="mt-4 space-y-3 text-[17px] font-bold text-text-secondary">
         {leadershipRoles.map((role) => <li>{role}</li>)}
       </ul>
     </article>

@@ -45,7 +45,7 @@ export default function Contact() {
         <h3 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
           Let&apos;s <span className="text-lcd-amber">connect.</span>
         </h3>
-        <p className="mt-5 max-w-[560px] text-base leading-relaxed text-text-secondary">
+        <p className="mt-5 max-w-[560px] text-lg font-medium leading-relaxed text-text-secondary">
           I&apos;m currently open to Summer 2027 internship opportunities in SDE and AI Engineering
           roles.
         </p>
@@ -68,7 +68,7 @@ export default function Contact() {
                 </span>
                 <span>
                   <span className="block">{preset.label}</span>
-                  <span className="mt-1 block font-sans text-xs font-normal normal-case tracking-normal text-text-secondary [text-shadow:none]">
+                  <span className="mt-1 block font-sans text-sm font-medium normal-case tracking-normal text-text-secondary [text-shadow:none]">
                     {preset.detail}
                   </span>
                 </span>

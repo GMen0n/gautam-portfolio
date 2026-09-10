@@ -24,14 +24,14 @@ export default function Projects() {
               <h3 className="font-display text-2xl font-semibold text-text-primary">
                 {project.title}
               </h3>
-              <p className="mt-3 line-clamp-4 text-[15px] leading-relaxed text-text-secondary">
+              <p className="mt-3 line-clamp-4 text-[17px] font-medium leading-relaxed text-text-secondary">
                 {project.description}
               </p>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {project.stack.map((tech) => (
                   <li
                     key={tech}
-                    className="border-l-2 border-lcd-amber bg-lcd-amber/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-text-secondary"
+                    className="border-l-2 border-lcd-amber bg-lcd-amber/10 px-2 py-0.5 font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-text-secondary"
                   >
                     {tech}
                   </li>
@@ -41,7 +41,7 @@ export default function Projects() {
                 href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="telltale telltale-amber mt-6"
+                className="candy-button candy-button-amber mt-6"
               >
                 GitHub
               </a>
